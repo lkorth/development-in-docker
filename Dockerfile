@@ -9,10 +9,6 @@ RUN apt-get update && apt-get install -y \
       locales \
       locales-all \
       make \
-      nodejs \
-      openjdk-11-jdk \
-      ruby \
-      ruby-dev \
       tmux \
       vim \
       wget \
@@ -24,6 +20,12 @@ ENV LANGUAGE en_US.UTF-8
 
 RUN git clone https://github.com/lkorth/dotfiles.git
 RUN cd /dotfiles && ./install.sh
+
+RUN apt-get update && apt-get install -y \
+     nodejs \
+     openjdk-11-jdk \
+     ruby \
+     ruby-dev
 
 # Ruby
 RUN gem install bundler
