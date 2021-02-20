@@ -18,6 +18,8 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
+RUN chsh -s /bin/zsh
+
 RUN git clone https://github.com/lkorth/dotfiles.git
 RUN cd /dotfiles && ./install.sh
 
