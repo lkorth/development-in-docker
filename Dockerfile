@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
       locales \
       locales-all \
       make \
+      pkg-config \
       tmux \
       vim \
       wget \
@@ -23,14 +24,21 @@ RUN chsh -s /bin/zsh
 RUN git clone https://github.com/lkorth/dotfiles.git
 RUN cd /dotfiles && ./install.sh
 
+# Ruby
+RUN apt-get update && apt-get install -y \
+      libjpeg-dev \
+      libmagickwand-dev \
+      libpng-dev \
+      libtiff-dev \
+      libwebp-dev \
+      libgsl0-dev \
+      ruby \
+      ruby-dev
+RUN gem install bundler
+
 RUN apt-get update && apt-get install -y \
      nodejs \
-     openjdk-11-jdk \
-     ruby \
-     ruby-dev
-
-# Ruby
-RUN gem install bundler
+     openjdk-11-jdk
 
 RUN mkdir -p /home/dev
 VOLUME /home/dev
