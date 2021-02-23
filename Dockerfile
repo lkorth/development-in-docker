@@ -38,6 +38,7 @@ RUN gem install bundler
 
 RUN apt-get update && apt-get install -y \
      nodejs \
+     npm \
      openjdk-11-jdk
 
 RUN mkdir -p /home/dev
