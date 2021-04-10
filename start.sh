@@ -8,4 +8,6 @@ then
   exit
 fi
 
-docker run --network host --volume $1:/home/dev --interactive --tty development-in-docker zsh
+WORKING_DIR=${1:-$(pwd)}
+
+docker run --network host --volume $WORKING_DIR:/home/dev --interactive --tty development-in-docker zsh
