@@ -8,6 +8,4 @@ then
   exit
 fi
 
-docker build . -t development-in-docker
-
 docker run --network host --volume $1:/home/dev --interactive --tty development-in-docker zsh
