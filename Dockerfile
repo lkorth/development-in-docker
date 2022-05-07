@@ -21,9 +21,6 @@ ENV LANGUAGE en_US.UTF-8
 
 RUN chsh -s /bin/zsh
 
-RUN git clone https://github.com/lkorth/dotfiles.git
-RUN cd /dotfiles && ./install.sh
-
 # Java
 RUN apt-get update && apt-get install -y \
       openjdk-11-jdk
@@ -45,6 +42,9 @@ RUN apt-get update && apt-get install -y \
      nodejs \
      npm \
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+RUN git clone https://github.com/lkorth/dotfiles.git
+RUN cd /dotfiles && ./install.sh
 
 RUN mkdir -p /home/dev
 VOLUME /home/dev
