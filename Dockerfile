@@ -24,6 +24,10 @@ RUN chsh -s /bin/zsh
 RUN git clone https://github.com/lkorth/dotfiles.git
 RUN cd /dotfiles && ./install.sh
 
+# Java
+RUN apt-get update && apt-get install -y \
+      openjdk-11-jdk
+
 # Ruby
 RUN apt-get update && apt-get install -y \
       libjpeg-dev \
@@ -36,10 +40,11 @@ RUN apt-get update && apt-get install -y \
       ruby-dev
 RUN gem install bundler
 
+# Node
 RUN apt-get update && apt-get install -y \
      nodejs \
      npm \
-     openjdk-11-jdk
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 RUN mkdir -p /home/dev
 VOLUME /home/dev
