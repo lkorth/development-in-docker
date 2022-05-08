@@ -10,4 +10,7 @@ fi
 
 WORKING_DIR=${1:-$(pwd)}
 
-docker run --network host --volume $WORKING_DIR:/home/dev --interactive --tty development-in-docker zsh
+docker run \
+  --volume $WORKING_DIR:/home/dev \
+  --user $(id -u):$(id -g) \
+  --interactive --tty development-in-docker zsh
