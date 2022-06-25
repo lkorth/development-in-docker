@@ -7,12 +7,14 @@ RUN apt-get update && apt-get install -y \
       curl \
       g++ \
       gcc \
+      gdb \
       git \
       jq \
       locales \
       locales-all \
       make \
       pkg-config \
+      procps \
       tmux \
       vim \
       wget \
