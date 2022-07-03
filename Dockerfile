@@ -1,7 +1,8 @@
 FROM debian:buster
 
-WORKDIR /home
-ENV HOME /home
+RUN useradd --create-home --shell /bin/zsh docker
+
+WORKDIR /home/docker
 
 RUN apt-get update && apt-get install -y \
       curl \
@@ -13,8 +14,10 @@ RUN apt-get update && apt-get install -y \
       locales \
       locales-all \
       make \
+      man \
       pkg-config \
       procps \
+      sudo \
       tmux \
       vim \
       wget \
@@ -23,8 +26,6 @@ RUN apt-get update && apt-get install -y \
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
-
-RUN chsh -s /bin/zsh
 
 # Java
 RUN apt-get update && apt-get install -y \
@@ -48,9 +49,13 @@ RUN apt-get update && apt-get install -y \
      npm \
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
+RUN echo "docker:docker" | chpasswd
+RUN adduser docker sudo
+USER docker
+
 RUN git clone https://github.com/lkorth/dotfiles.git
 RUN cd dotfiles && ./install.sh
 
-RUN mkdir -p /home/dev
-VOLUME /home/dev
-WORKDIR /home/dev
+RUN mkdir -p /home/docker/dev
+VOLUME /home/docker/dev
+WORKDIR /home/docker/dev
