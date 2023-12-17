@@ -48,6 +48,7 @@ RUN apt-get update && apt-get install -y \
      nodejs \
      npm \
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+RUN export NVM_DIR="$HOME/.nvm"
 
 RUN echo "docker:docker" | chpasswd
 RUN adduser docker sudo
