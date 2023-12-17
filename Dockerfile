@@ -43,6 +43,14 @@ RUN apt-get update && apt-get install -y \
       ruby-dev
 RUN gem install bundler -v 2.3.27
 
+# python
+RUN apt-get update && apt-get install -y \
+      python \
+      python3 \
+      python-pip \
+      python3-pip
+RUN pip3 install awscli
+
 # Node
 RUN apt-get update && apt-get install -y \
      nodejs \
