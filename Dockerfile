@@ -41,7 +41,7 @@ RUN apt-get update && apt-get install -y \
       libgsl0-dev \
       ruby \
       ruby-dev
-RUN gem install bundler
+RUN gem install bundler -v 2.3.27
 
 # Node
 RUN apt-get update && apt-get install -y \
