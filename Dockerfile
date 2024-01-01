@@ -1,10 +1,11 @@
-FROM debian:buster
+FROM debian:bookworm
 
 RUN useradd --create-home --shell /bin/zsh docker
 
 WORKDIR /home/docker
 
 RUN apt-get update && apt-get install -y \
+      awscli \
       curl \
       g++ \
       gcc \
@@ -29,7 +30,7 @@ ENV LANGUAGE en_US.UTF-8
 
 # Java
 RUN apt-get update && apt-get install -y \
-      openjdk-11-jdk
+      openjdk-17-jdk
 
 # Ruby
 RUN apt-get update && apt-get install -y \
@@ -45,11 +46,8 @@ RUN gem install bundler -v 2.3.27
 
 # python
 RUN apt-get update && apt-get install -y \
-      python \
       python3 \
-      python-pip \
       python3-pip
-RUN pip3 install awscli
 
 # Node
 RUN apt-get update && apt-get install -y \
@@ -64,6 +62,8 @@ USER docker
 
 RUN git clone https://github.com/lkorth/dotfiles.git
 RUN cd dotfiles && ./install.sh
+
+RUN git config --global --add safe.directory /home/docker/dev
 
 RUN mkdir -p /home/docker/dev
 VOLUME /home/docker/dev
