@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
       locales-all \
       make \
       man \
+      netcat-traditional \
       pkg-config \
       procps \
       sudo \
