@@ -1,6 +1,10 @@
 FROM debian:bookworm
 
 RUN useradd --create-home --shell /bin/zsh docker
+RUN echo "docker:docker" | chpasswd
+RUN adduser docker sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER docker
 
 WORKDIR /home/docker
 
@@ -45,7 +49,7 @@ RUN apt-get update && apt-get install -y \
       ruby-dev
 RUN gem install bundler -v 2.3.27
 
-# python
+# Python
 RUN apt-get update && apt-get install -y \
       python3 \
       python3-pip
@@ -56,10 +60,6 @@ RUN apt-get update && apt-get install -y \
      npm \
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 RUN export NVM_DIR="$HOME/.nvm"
-
-RUN echo "docker:docker" | chpasswd
-RUN adduser docker sudo
-USER docker
 
 RUN git clone https://github.com/lkorth/dotfiles.git
 RUN cd dotfiles && ./install.sh
