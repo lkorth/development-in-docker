@@ -54,7 +54,8 @@ RUN gem install bundler -v 2.3.27
 # Python
 RUN apt-get update && apt-get install -y \
       python3 \
-      python3-pip
+      python3-pip \
+      python3-venv
 
 # Node
 RUN apt-get update && apt-get install -y \
