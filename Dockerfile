@@ -1,13 +1,6 @@
 FROM debian:bookworm
 
-RUN useradd --create-home --shell /bin/zsh docker
-RUN echo "docker:docker" | chpasswd
-RUN adduser docker sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-USER docker
-
-WORKDIR /home/docker
-
+# base packages
 RUN apt-get update && apt-get install -y \
       awscli \
       curl \
@@ -33,12 +26,21 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
+# user setup
+RUN useradd --create-home --shell /bin/zsh docker
+RUN echo "docker:docker" | chpasswd
+RUN adduser docker sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER docker
+
+WORKDIR /home/docker
+
 # Java
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && sudo apt-get install -y \
       openjdk-17-jdk
 
 # Ruby
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && sudo apt-get install -y \
       libjpeg-dev \
       libmagickwand-dev \
       libpng-dev \
@@ -47,16 +49,16 @@ RUN apt-get update && apt-get install -y \
       libgsl0-dev \
       ruby \
       ruby-dev
-RUN gem install bundler -v 2.3.27
+RUN sudo gem install bundler -v 2.3.27
 
 # Python
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && sudo apt-get install -y \
       python3 \
       python3-pip \
       python3-venv
 
 # Node
-RUN apt-get update && apt-get install -y \
+RUN sudo apt-get update && sudo apt-get install -y \
      nodejs \
      npm \
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
