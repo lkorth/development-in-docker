@@ -22,9 +22,9 @@ RUN apt-get update && apt-get install -y \
       wget \
       zsh
 
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 
 # user setup
 RUN useradd --create-home --shell /bin/zsh docker
